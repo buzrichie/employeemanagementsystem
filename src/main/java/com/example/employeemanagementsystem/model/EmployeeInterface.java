@@ -1,16 +1,18 @@
-package com.example.employeemanagementsystem;
+package com.example.employeemanagementsystem.model;
+
+import java.time.LocalDate;
 
 public interface EmployeeInterface<T> {
 
-    T getEmployeeId();
+    T getId();
 
-    void setEmployeeId(T id);
+    void setId(T id);
 
     String getName();
 
     void setName(String name);
 
-    String getDepartment();
+    Employee.DepartmentType getDepartment();
 
     void setDepartment(String department);
 
@@ -22,10 +24,13 @@ public interface EmployeeInterface<T> {
 
     void setPerformanceRating(byte scale);
 
-    int getYearsOfExperience();
+    int setYearsOfExperience();
+
+    void setYearsOfExperience(int years);
 
     boolean isActive();
 
     void setActive(boolean status);
 }
+
 
