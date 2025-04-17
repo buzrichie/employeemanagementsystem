@@ -49,9 +49,6 @@ public class DashboardController {
     private TextField ratingField;
 
 
-
-
-
     // Add Employee Event Handler
     public void addEmployee(){
         try{
@@ -86,6 +83,22 @@ public class DashboardController {
 
         } catch (Exception e) {
             System.out.println(e.toString());
+        }
+    }
+
+    // Remove or Delete Employee Event Handler
+    public void deleteEmployee(){
+        try{
+        Employee<String> selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null) {
+            employeeService.removeEmployee(selectedEmployee.getId());
+            employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()).sorted());
+        }else {
+            System.out.println("No employee selected.");
+        }
+
+    } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }

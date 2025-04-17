@@ -39,7 +39,7 @@
             <TextField fx:id="salaryField" promptText="Salary" />
             <TextField fx:id="ratingField" promptText="Rating" />
             <Button onAction="#addEmployee" text="Add" />
-            <Button text="Remove Selected" />
+            <Button onAction="#deleteEmployee" text="Remove Selected" />
             <Button text="Sort by Experience" />
         </HBox>
     </VBox>

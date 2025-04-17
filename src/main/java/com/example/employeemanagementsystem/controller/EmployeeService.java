@@ -22,7 +22,11 @@ public class EmployeeService<T> {
 
 
     public void removeEmployee(T employeeId){
-        employees.remove(employeeId);
+        if (employees.containsKey(employeeId)) {
+            employees.remove(employeeId);
+        }else {
+            System.out.println("Key "+employeeId+" not " + "found");
+        }
     }
 
     public void updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) {
