@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.DashboardController">
+
+    <!-- Search Bar -->
+    <HBox spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <TextField fx:id="searchField" promptText="Search by name..." HBox.hgrow="ALWAYS" />
+        <Button text="Search" />
+        <Button text="Reset" />
+    </HBox>
+
+    <!-- Table -->
+    <TableView fx:id="employeeTable" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="100" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
+            <TableColumn fx:id="departmentColumn" prefWidth="150" text="Department" />
+            <TableColumn fx:id="salaryColumn" prefWidth="100" text="Salary" />
+            <TableColumn fx:id="ratingColumn" prefWidth="100" text="Rating" />
+        </columns>
+    </TableView>
+
+    <!-- Input Fields + Buttons -->
+    <VBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <HBox spacing="10">
+            <TextField fx:id="idField" promptText="ID" />
+            <TextField fx:id="nameField" promptText="Name" />
+            <TextField fx:id="departmentField" promptText="Department" />
+        </HBox>
+        <HBox spacing="10">
+            <TextField fx:id="salaryField" promptText="Salary" />
+            <TextField fx:id="ratingField" promptText="Rating" />
+            <Button onAction="#addEmployee" text="Add" />
+            <Button text="Remove Selected" />
+            <Button text="Sort by Experience" />
+        </HBox>
+    </VBox>
+
+</AnchorPane>

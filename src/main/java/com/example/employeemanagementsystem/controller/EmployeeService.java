@@ -7,12 +7,19 @@ import java.util.stream.Collectors;
 
 public class EmployeeService<T> {
 
-    private final Map<T , Employee<T>> employees = new HashMap<>();
+    private Map<T , Employee<T>> employees = new HashMap<>();
+
+    public EmployeeService(){
+        this.employees = new HashMap<T, Employee<T>>();
+    }
 
     // CRUD operations
     public void addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary){
         employees.put(employeeId, new Employee<>(employeeId, name, department, salary));
+        System.out.println(employees.values());
     }
+
+
 
     public void removeEmployee(T employeeId){
         employees.remove(employeeId);
@@ -30,7 +37,7 @@ public class EmployeeService<T> {
         return employees.get(employeeId);
     }
 
-    public List<Employee<T>> getAllEmployees(){
+    public Collection<Employee<T>> getAllEmployees(){
         return new ArrayList<>(employees.values());
     }
 
