@@ -14,7 +14,6 @@ public class WelcomeController {
     @FXML
     protected void handleGoToDashboard(ActionEvent event) throws IOException {
 
-//        welcomeText.setText("Welcome to JavaFX Application!");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());

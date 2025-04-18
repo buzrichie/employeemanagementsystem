@@ -23,17 +23,11 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
 
         EmployeeService<String> employee= new EmployeeService<>();
-        employee.addEmployee("2","Paul", Employee.DepartmentType.IT,300.00, 2);
-        employee.addEmployee("3","Rich", Employee.DepartmentType.HR,500.00,4);
-        employee.addEmployee("4","Paul", Employee.DepartmentType.IT,300.00,4);
-        employee.addEmployee("5","Paul", Employee.DepartmentType.IT,300.00,1);
+        employee.addEmployee("1","Paul", Employee.DepartmentType.IT,300.00, 2);
+        employee.addEmployee("2","Rich", Employee.DepartmentType.HR,500.00,5);
+        employee.addEmployee("3","Fred", Employee.DepartmentType.IT,300.00,3);
+        employee.addEmployee("4","Abena", Employee.DepartmentType.IT,300.00,4);
 
-       // employee.displayEmployeesWithForEach();
-
-//        employee.displayEmployeesWithForEach();
-//        employee.displayEmployeeReportWithStreams();
-//        employees.add(employee1);
-//        employees.add(employee2);
 
         Collections.sort( employee.getAllEmployees());
         for (Employee<String> e: employee.getAllEmployees()){
@@ -42,9 +36,5 @@ public class HelloApplication extends Application {
 
 
         launch();
-    }
-
-    public static void text(){
-
     }
 }

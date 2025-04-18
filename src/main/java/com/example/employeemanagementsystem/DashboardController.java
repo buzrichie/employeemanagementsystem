@@ -110,7 +110,7 @@ public class DashboardController {
             employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
             employeeService.displayEmployeeReportWithStreams();
 
-//            employeeTextFieldCleanUp();
+            employeeTextFieldCleanUp();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -150,7 +150,6 @@ public class DashboardController {
     }
 
     public void updateEmployeeDetails(ActionEvent event) {
-        System.out.println("Clicked");
         Employee<String> selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
 
         if (selectedEmployee != null) {
