@@ -5,17 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloController {
+public class WelcomeController {
     @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick(ActionEvent event) throws IOException {
+    protected void handleGoToDashboard(ActionEvent event) throws IOException {
 
 //        welcomeText.setText("Welcome to JavaFX Application!");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard.fxml"));
@@ -24,5 +21,18 @@ public class HelloController {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void handleExit(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText(null);
+        alert.setContentText("Goodbye!");
+        alert.showAndWait();
+
+        // Close the window
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

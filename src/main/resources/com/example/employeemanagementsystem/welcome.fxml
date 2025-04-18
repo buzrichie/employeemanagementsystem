@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.employeemanagementsystem.WelcomeController"
+      alignment="CENTER"
+      spacing="20.0"
+      prefWidth="600" prefHeight="400">
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <Label text="Employee Management System">
+        <font>
+            <Font size="24" />
+        </font>
+    </Label>
+
+    <Label text="Welcome! Manage your employees with ease." />
+
+    <Button text="Go to Dashboard" onAction="#handleGoToDashboard"/>
+    <Button text="Exit" onAction="#handleExit"/>
+</VBox>

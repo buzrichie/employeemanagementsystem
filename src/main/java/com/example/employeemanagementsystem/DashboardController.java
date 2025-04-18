@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.Collections;
-
+import java.util.Comparator;
 
 
 public class DashboardController {
@@ -107,10 +107,10 @@ public class DashboardController {
             int yearsOfExperience = Integer.parseInt(this.yearsOfExperienceField.getText());
 
             employeeService.addEmployee(id,name,selectedDepartment,salary, yearsOfExperience);
-            employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()).sorted());
+            employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
             employeeService.displayEmployeeReportWithStreams();
 
-            employeeTextFieldCleanUp();
+//            employeeTextFieldCleanUp();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -185,16 +185,13 @@ public class DashboardController {
     }
 
 
-    public void sortByExperience(){
-        if (!employeeService.getAllEmployees().isEmpty()){
-            System.out.println(employeeService.getAllEmployees());
-            Collections.sort(employeeService.getAllEmployees());
-            for (Employee<String> e: employeeService.getAllEmployees()){
-                System.out.println(e.getName());
-            }
-            employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
+    public void sortByExperience() {
+        if (!employeeService.getAllEmployees().isEmpty()) {
+            employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()).sorted());
         }
     }
+
+
     public void employeeTextFieldCleanUp(){
         idField.clear();
         nameField.clear();

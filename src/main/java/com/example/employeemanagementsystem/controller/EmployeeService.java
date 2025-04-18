@@ -120,4 +120,10 @@ public class EmployeeService<T> {
                         e.getSalary(),
                         e.getPerformanceRating()));
     }
+
+    public void sortByExperience() {
+        getAllEmployees().sort(Comparator.reverseOrder()); // because compareTo() sorts ascending
+        displayEmployeesWithForEach();
+    }
+
 }

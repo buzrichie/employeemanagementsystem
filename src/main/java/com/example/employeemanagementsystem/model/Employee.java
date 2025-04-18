@@ -111,9 +111,8 @@ public class Employee<T> implements Comparable<Employee<T>>,EmployeeInterface<T>
     // Sort employees by years of experience, most experienced first
     @Override
     public int compareTo(Employee<T> other) {
-        return Integer.compare(this.getYearsOfExperience(), other.getYearsOfExperience());
+        return Integer.compare(other.getYearsOfExperience(), this.getYearsOfExperience());
     }
-
     // Sorts employees by salary (highest first)
     Comparator<Employee<T>> EmployeeSalaryComparator = Comparator.comparing((x)->
          Double.compare(this.getSalary(), x.getSalary())
