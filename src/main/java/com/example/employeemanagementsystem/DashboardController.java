@@ -149,7 +149,7 @@ public class DashboardController {
         searchByName();
     }
 
-    public void updateEmployeeDetails(ActionEvent event) {git
+    public void updateEmployeeDetails(ActionEvent event) {
         Employee<String> selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
 
         if (selectedEmployee != null) {
