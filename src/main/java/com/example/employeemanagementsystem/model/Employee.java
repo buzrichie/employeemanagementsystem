@@ -12,13 +12,22 @@ public class Employee<T> implements Comparable<Employee<T>>,EmployeeInterface<T>
     private int yearsOfExperience;
     private boolean active;
 
-    public Employee(T employeeId, String name, DepartmentType department, double salary){
+    public Employee(T employeeId, String name, DepartmentType department, double salary, int yearsOfExperience){
         this.id = employeeId;
         this.name = name;
         this.department= department;
         this.salary = salary;
+        this.yearsOfExperience = yearsOfExperience;
+        this.performanceRating = 0;
     }
-
+    public Employee(T employeeId, String name, DepartmentType department, double salary, int yearsOfExperience, double performanceRating){
+        this.id = employeeId;
+        this.name = name;
+        this.department= department;
+        this.salary = salary;
+        this.yearsOfExperience = yearsOfExperience;
+        this.performanceRating = performanceRating;
+    }
     @Override
     public String toString(){
         return "Employee{"+"id="+this.id+", name='"+this.name+ '\''+ ", role='"+this.department+'\''+'}';
@@ -76,12 +85,12 @@ public class Employee<T> implements Comparable<Employee<T>>,EmployeeInterface<T>
     }
 
     @Override
-    public int setYearsOfExperience() {
+    public int getYearsOfExperience() {
         return this.yearsOfExperience;
     }
 
     @Override
-    public void setYearsOfExperience(int years) {
+    public void getYearsOfExperience(int years) {
         this.yearsOfExperience = years;
     }
 
@@ -102,7 +111,7 @@ public class Employee<T> implements Comparable<Employee<T>>,EmployeeInterface<T>
     // Sort employees by years of experience, most experienced first
     @Override
     public int compareTo(Employee<T> other) {
-        return Integer.compare(this.setYearsOfExperience(), other.setYearsOfExperience());
+        return Integer.compare(this.getYearsOfExperience(), other.getYearsOfExperience());
     }
 
     // Sorts employees by salary (highest first)

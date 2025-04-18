@@ -1,7 +1,5 @@
 package com.example.employeemanagementsystem.model;
 
-import java.time.LocalDate;
-
 public interface EmployeeInterface<T> {
 
     T getId();
@@ -24,9 +22,9 @@ public interface EmployeeInterface<T> {
 
     void setPerformanceRating(byte scale);
 
-    int setYearsOfExperience();
+    int getYearsOfExperience();
 
-    void setYearsOfExperience(int years);
+    void getYearsOfExperience(int years);
 
     boolean isActive();
 

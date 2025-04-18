@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class HelloApplication extends Application {
     @Override
@@ -22,22 +23,22 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
 
         EmployeeService<String> employee= new EmployeeService<>();
-        employee.addEmployee("2","Paul", Employee.DepartmentType.IT,300.00);
-        employee.addEmployee("3","Rich", Employee.DepartmentType.HR,500.00);
-        employee.addEmployee("4","Paul", Employee.DepartmentType.IT,300.00);
-        employee.addEmployee("5","Paul", Employee.DepartmentType.IT,300.00);
+        employee.addEmployee("2","Paul", Employee.DepartmentType.IT,300.00, 2);
+        employee.addEmployee("3","Rich", Employee.DepartmentType.HR,500.00,4);
+        employee.addEmployee("4","Paul", Employee.DepartmentType.IT,300.00,4);
+        employee.addEmployee("5","Paul", Employee.DepartmentType.IT,300.00,1);
 
        // employee.displayEmployeesWithForEach();
 
-        employee.displayEmployeesWithForEach();
+//        employee.displayEmployeesWithForEach();
 //        employee.displayEmployeeReportWithStreams();
 //        employees.add(employee1);
 //        employees.add(employee2);
 
-
-//        for (Employee<String> e: employees){
-//            System.out.println(e.getName());
-//        }
+        Collections.sort( employee.getAllEmployees());
+        for (Employee<String> e: employee.getAllEmployees()){
+            System.out.println(e.getName());
+        }
 
 
         launch();

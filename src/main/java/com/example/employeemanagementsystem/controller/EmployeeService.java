@@ -14,11 +14,10 @@ public class EmployeeService<T> {
     }
 
     // CRUD operations
-    public void addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary){
-        employees.put(employeeId, new Employee<>(employeeId, name, department, salary));
+    public void addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience){
+        employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
         System.out.println(employees.values());
     }
-
 
 
     public void removeEmployee(T employeeId){
@@ -41,7 +40,7 @@ public class EmployeeService<T> {
         return employees.get(employeeId);
     }
 
-    public Collection<Employee<T>> getAllEmployees(){
+    public List<Employee<T>> getAllEmployees(){
         return new ArrayList<>(employees.values());
     }
 
@@ -55,7 +54,9 @@ public class EmployeeService<T> {
     }
 
     public List<Employee<T>> searchNameByTerm(String term){
-        return employees.values().stream().filter(e->e.getName().toLowerCase().contains(term.toLowerCase())).collect(Collectors.toList());
+        return employees.values().stream()
+                .filter(e -> e.getName().toLowerCase().contains(term.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public List<Employee<T>> filterByPerformance(double minRating) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -8,13 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.DashboardController">
+<AnchorPane prefHeight="426.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.DashboardController">
 
     <!-- Search Bar -->
     <HBox spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-        <TextField fx:id="searchField" promptText="Search by name..." HBox.hgrow="ALWAYS" />
-        <Button text="Search" />
-        <Button text="Reset" />
+        <TextField fx:id="searchField" onKeyTyped="#searchByName" promptText="Search by name..." HBox.hgrow="ALWAYS" />
+        <Button onAction="#searchByName" text="Search" />
+        <Button onAction="#clearSearchByName" text="Reset" />
     </HBox>
 
     <!-- Table -->
@@ -24,6 +25,7 @@
             <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
             <TableColumn fx:id="departmentColumn" prefWidth="150" text="Department" />
             <TableColumn fx:id="salaryColumn" prefWidth="100" text="Salary" />
+            <TableColumn fx:id="yearsOfExperienceColumn" prefWidth="150" text="Experience" />
             <TableColumn fx:id="ratingColumn" prefWidth="100" text="Rating" />
         </columns>
     </TableView>
@@ -33,14 +35,16 @@
         <HBox spacing="10">
             <TextField fx:id="idField" promptText="ID" />
             <TextField fx:id="nameField" promptText="Name" />
-            <TextField fx:id="departmentField" promptText="Department" />
+         <ChoiceBox fx:id="departmentChoiceBox" prefWidth="150.0" />
+            <TextField fx:id="yearsOfExperienceField" promptText="Years of experience" />
         </HBox>
         <HBox spacing="10">
             <TextField fx:id="salaryField" promptText="Salary" />
-            <TextField fx:id="ratingField" promptText="Rating" />
+         <ChoiceBox fx:id="ratingChoiceBox" prefWidth="150.0" />
             <Button onAction="#addEmployee" text="Add" />
+            <Button onAction="#updateEmployeeDetails" text="Update" />
             <Button onAction="#deleteEmployee" text="Remove Selected" />
-            <Button text="Sort by Experience" />
+            <Button onAction="#sortByExperience" text="Sort by Experience" />
         </HBox>
     </VBox>
 
