@@ -44,6 +44,7 @@ public class DashboardController {
     @FXML
     private TextField yearsOfExperienceField;
 
+    private long selectedUserId;
 
     @FXML
     private void initialize() {
@@ -67,7 +68,7 @@ public class DashboardController {
         employeeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Populate fields with selected employee
-                idField.setText(newSelection.getId());
+                selectedUserId = Long.parseLong(newSelection.getId());
                 nameField.setText(newSelection.getName());
                 departmentChoiceBox.setValue(Employee.DepartmentType.valueOf(newSelection.getDepartment().toString()));
                 ratingChoiceBox.setValue(newSelection.getPerformanceRating());
@@ -166,7 +167,7 @@ public class DashboardController {
 
     // Extract All Employee field Data
     private Employee<String> getEmployeeData() {
-        String id = idField.getText();
+        String id = String.valueOf(selectedUserId);
         String name = nameField.getText();
         Employee.DepartmentType selectedDepartment = departmentChoiceBox.getValue();
         double selectedRating = ratingChoiceBox.getValue();
@@ -185,7 +186,6 @@ public class DashboardController {
 
     //Clean up the Employee details after Adding or Updating
     public void employeeTextFieldCleanUp(){
-        idField.clear();
         nameField.clear();
         salaryField.clear();
         yearsOfExperienceField.clear();
