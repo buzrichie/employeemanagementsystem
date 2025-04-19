@@ -9,31 +9,37 @@ public class EmployeeService<T> {
 
     private Map<T , Employee<T>> employees = new HashMap<>();
 
+    private static long userId;
+
     public EmployeeService(){
         this.employees = new HashMap<T, Employee<T>>();
     }
 
+    public long getUserId() {
+        return userId;
+    }
+    public void setUserId() {
+         EmployeeService.userId = userId+1;
+    }
+
     // CRUD operations
-    public void addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience){
-        employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
-        System.out.println(employees.values());
+    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience){
+
+       return employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
     }
 
-
-    public void removeEmployee(T employeeId){
-        if (employees.containsKey(employeeId)) {
-            employees.remove(employeeId);
-        }else {
-            System.out.println("Key "+employeeId+" not " + "found");
+    public Employee<T> removeEmployee(T employeeId){
+        if (!employees.containsKey(employeeId)) {
+          return null;
         }
+        return employees.remove(employeeId);
     }
 
-    public void updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) {
-        if (employees.containsKey(employeeId)) {
-            employees.put(employeeId, updatedEmployee);
-        } else {
-            System.out.println("Employee not found.");
+    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) {
+        if (!employees.containsKey(employeeId)) {
+            return  null;
         }
+        return employees.put(employeeId, updatedEmployee);
     }
 
     public Employee<T> getEmployeeById(T employeeId) {
@@ -121,9 +127,9 @@ public class EmployeeService<T> {
                         e.getPerformanceRating()));
     }
 
-    public void sortByExperience() {
-        getAllEmployees().sort(Comparator.reverseOrder()); // because compareTo() sorts ascending
-        displayEmployeesWithForEach();
+    public List<Employee<T>> sortByExperience() {
+        return getAllEmployees().stream().sorted().toList();
     }
+
 
 }

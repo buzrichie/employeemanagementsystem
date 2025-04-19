@@ -10,8 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 public class DashboardController {
@@ -19,10 +17,8 @@ public class DashboardController {
 
     @FXML
     private TableView<Employee<String>> employeeTable;
-
     @FXML
     private TableColumn<Employee<?>, String> idColumn;
-
     @FXML
     private TableColumn<Employee<?>, String> nameColumn;
     @FXML
@@ -58,12 +54,6 @@ public class DashboardController {
         ratingChoiceBox.getItems().setAll(new Double[]{1.0, 2.0, 3.0,4.0,5.0});
         ratingChoiceBox.setValue(1.0);
 
-        departmentChoiceBox.setOnAction(this::addEmployee);
-        ratingChoiceBox.setOnAction(this::addEmployee);
-
-        departmentChoiceBox.setOnAction(this::updateEmployeeDetails);
-        ratingChoiceBox.setOnAction(this::updateEmployeeDetails);
-
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
@@ -92,7 +82,7 @@ public class DashboardController {
     public void addEmployee(ActionEvent event){
         try{
 
-            if (this.idField.getText().isEmpty()||
+            if (
                     this.nameField.getText().isEmpty()||
                     this.salaryField.getText().isEmpty()||
                     this.yearsOfExperienceField.getText().isEmpty()
@@ -100,13 +90,16 @@ public class DashboardController {
                 System.out.println("Some Fields are empty");
                 throw new RuntimeException("Fields can not be empty");
             }
-            String id = this.idField.getText();
+
+            employeeService.setUserId();
+            long id = employeeService.getUserId();
+
             String name = this.nameField.getText();
             Employee.DepartmentType selectedDepartment = departmentChoiceBox.getValue();
             double salary = Double.parseDouble(this.salaryField.getText());
             int yearsOfExperience = Integer.parseInt(this.yearsOfExperienceField.getText());
 
-            employeeService.addEmployee(id,name,selectedDepartment,salary, yearsOfExperience);
+            employeeService.addEmployee(String.valueOf(id),name,selectedDepartment,salary, yearsOfExperience);
             employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
             employeeService.displayEmployeeReportWithStreams();
 
@@ -149,6 +142,7 @@ public class DashboardController {
         searchByName();
     }
 
+    //Update Employee Event Handler
     public void updateEmployeeDetails(ActionEvent event) {
         Employee<String> selectedEmployee = employeeTable.getSelectionModel().getSelectedItem();
 
@@ -160,7 +154,7 @@ public class DashboardController {
                 employeeService.updateEmployeeDetails(selectedEmployee.getId(), updatedEmployee);
 
                 // Update table view
-                employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()).sorted());
+                employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
                 employeeTextFieldCleanUp();
             } catch (Exception e) {
                 System.out.println("Error updating employee: " + e.getMessage());
@@ -183,20 +177,18 @@ public class DashboardController {
         return new Employee<>(id, name, selectedDepartment, salary, yearsOfExperience, selectedRating);
     }
 
-
     public void sortByExperience() {
         if (!employeeService.getAllEmployees().isEmpty()) {
-            employeeTable.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()).sorted());
+            employeeTable.setItems(FXCollections.observableArrayList(employeeService.sortByExperience()));
         }
     }
 
-
+    //Clean up the Employee details after Adding or Updating
     public void employeeTextFieldCleanUp(){
         idField.clear();
         nameField.clear();
         salaryField.clear();
         yearsOfExperienceField.clear();
     }
-
 
 }
