@@ -7,5 +7,4 @@ public class InvalidSalaryException extends Exception{
         super(message);
     }
 
-
 }

@@ -1,5 +1,6 @@
 package com.example.employeemanagementsystem.controller;
 
+import com.example.employeemanagementsystem.exception.EmployeeNotFoundException;
 import com.example.employeemanagementsystem.exception.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
 import com.example.employeemanagementsystem.util.ValidationUtils;
@@ -30,22 +31,20 @@ public class EmployeeService<T> {
        return employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
     }
 
-    public Employee<T> removeEmployee(T employeeId){
-        if (!employees.containsKey(employeeId)) {
-          return null;
-        }
+    public Employee<T> removeEmployee(T employeeId) throws EmployeeNotFoundException{
+        ValidationUtils.validateEmployeeById(employees, employeeId);
         return employees.remove(employeeId);
     }
 
-    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) throws InvalidSalaryException {
-        if (!employees.containsKey(employeeId)) {
-            return  null;
-        }
+    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) throws InvalidSalaryException, EmployeeNotFoundException {
+        ValidationUtils.validateEmployeeById(employees, updatedEmployee.getId());
         ValidationUtils.validateSalary(updatedEmployee.getSalary());
+
         return employees.put(employeeId, updatedEmployee);
     }
 
-    public Employee<T> getEmployeeById(T employeeId) {
+    public Employee<T> getEmployeeById(T employeeId) throws EmployeeNotFoundException {
+        ValidationUtils.validateEmployeeById(employees, employeeId);
         return employees.get(employeeId);
     }
 
