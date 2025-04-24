@@ -1,10 +1,10 @@
 package com.example.employeemanagementsystem.util;
 
 import com.example.employeemanagementsystem.exception.EmployeeNotFoundException;
+import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
 import com.example.employeemanagementsystem.exception.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
 
-import java.util.List;
 import java.util.Map;
 
 public class ValidationUtils {
@@ -17,6 +17,14 @@ public class ValidationUtils {
         if (!employeeMap.containsKey(id)) {
             throw new EmployeeNotFoundException("Employee with ID " + id + " was not found.");
         }
+    }
+    public static Employee.DepartmentType validateDepartment(String input) throws InvalidDepartmentException {
+        for (Employee.DepartmentType type : Employee.DepartmentType.values()) {
+            if (type.name().equalsIgnoreCase(input)) {
+                return type;
+            }
+        }
+        throw new InvalidDepartmentException("Invalid department: " + input);
     }
 
 }

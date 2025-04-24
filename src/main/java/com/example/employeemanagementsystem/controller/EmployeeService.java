@@ -1,6 +1,7 @@
 package com.example.employeemanagementsystem.controller;
 
 import com.example.employeemanagementsystem.exception.EmployeeNotFoundException;
+import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
 import com.example.employeemanagementsystem.exception.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
 import com.example.employeemanagementsystem.util.ValidationUtils;
@@ -26,8 +27,9 @@ public class EmployeeService<T> {
     }
 
     // CRUD operations
-    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience) throws InvalidSalaryException {
+    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience) throws InvalidSalaryException, InvalidDepartmentException {
         ValidationUtils.validateSalary(salary);
+        ValidationUtils.validateDepartment(String.valueOf(department));
        return employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
     }
 
