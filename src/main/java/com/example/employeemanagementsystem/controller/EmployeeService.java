@@ -1,6 +1,11 @@
 package com.example.employeemanagementsystem.controller;
 
+import com.example.employeemanagementsystem.exception.EmployeeNotFoundException;
+import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
+import com.example.employeemanagementsystem.exception.InvalidSalaryException;
+import com.example.employeemanagementsystem.exception.InvalidYearOfExperienceException;
 import com.example.employeemanagementsystem.model.Employee;
+import com.example.employeemanagementsystem.util.ValidationUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,26 +28,27 @@ public class EmployeeService<T> {
     }
 
     // CRUD operations
-    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience){
-
+    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience) throws InvalidSalaryException, InvalidDepartmentException, InvalidYearOfExperienceException {
+        ValidationUtils.validateSalary(salary);
+        ValidationUtils.validateDepartment(String.valueOf(department));
+        ValidationUtils.validateYearOfExperience(yearsOfExperience);
        return employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
     }
 
-    public Employee<T> removeEmployee(T employeeId){
-        if (!employees.containsKey(employeeId)) {
-          return null;
-        }
+    public Employee<T> removeEmployee(T employeeId) throws EmployeeNotFoundException{
+        ValidationUtils.validateEmployeeById(employees, employeeId);
         return employees.remove(employeeId);
     }
 
-    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) {
-        if (!employees.containsKey(employeeId)) {
-            return  null;
-        }
+    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) throws InvalidSalaryException, EmployeeNotFoundException, InvalidYearOfExperienceException {
+        ValidationUtils.validateEmployeeById(employees, updatedEmployee.getId());
+        ValidationUtils.validateSalary(updatedEmployee.getSalary());
+        ValidationUtils.validateYearOfExperience(updatedEmployee.getYearsOfExperience());
         return employees.put(employeeId, updatedEmployee);
     }
 
-    public Employee<T> getEmployeeById(T employeeId) {
+    public Employee<T> getEmployeeById(T employeeId) throws EmployeeNotFoundException {
+        ValidationUtils.validateEmployeeById(employees, employeeId);
         return employees.get(employeeId);
     }
 

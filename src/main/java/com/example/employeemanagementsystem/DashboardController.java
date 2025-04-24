@@ -1,7 +1,10 @@
 package com.example.employeemanagementsystem;
 
 import com.example.employeemanagementsystem.controller.EmployeeService;
+import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
+import com.example.employeemanagementsystem.exception.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
+import com.example.employeemanagementsystem.util.ValidationUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -106,7 +109,10 @@ public class DashboardController {
 
             employeeTextFieldCleanUp();
 
-        } catch (Exception e) {
+        }catch (NumberFormatException ex){
+            System.out.println("Please enter a number.");
+        }
+        catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

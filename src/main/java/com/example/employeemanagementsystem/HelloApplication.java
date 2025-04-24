@@ -1,6 +1,9 @@
 package com.example.employeemanagementsystem;
 
 import com.example.employeemanagementsystem.controller.EmployeeService;
+import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
+import com.example.employeemanagementsystem.exception.InvalidSalaryException;
+import com.example.employeemanagementsystem.exception.InvalidYearOfExperienceException;
 import com.example.employeemanagementsystem.model.Employee;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,21 +23,24 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         EmployeeService<String> employee= new EmployeeService<>();
-        employee.addEmployee("1","Paul", Employee.DepartmentType.IT,300.00, 2);
-        employee.addEmployee("2","Rich", Employee.DepartmentType.HR,500.00,5);
-        employee.addEmployee("3","Fred", Employee.DepartmentType.IT,300.00,3);
-        employee.addEmployee("4","Abena", Employee.DepartmentType.IT,300.00,4);
-
+        try{
+            employee.addEmployee("1","Paul", Employee.DepartmentType.IT,300.00, 2);
+            employee.addEmployee("2","Rich", Employee.DepartmentType.HR,500.00,5);
+            employee.addEmployee("3","Fred", Employee.DepartmentType.IT,300.00,3);
+            employee.addEmployee("4","Abena", Employee.DepartmentType.IT,300.00,4);
+        }catch (InvalidSalaryException | InvalidDepartmentException | InvalidYearOfExperienceException e){
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Collections.sort( employee.getAllEmployees());
         for (Employee<String> e: employee.getAllEmployees()){
             System.out.println(e.getName());
         }
-
-
         launch();
     }
 }
