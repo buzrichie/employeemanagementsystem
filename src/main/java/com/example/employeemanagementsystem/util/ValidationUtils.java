@@ -4,6 +4,7 @@ import com.example.employeemanagementsystem.exception.EmployeeNotFoundException;
 import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
 import com.example.employeemanagementsystem.exception.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
+import com.example.employeemanagementsystem.exception.InvalidYearOfExperienceException;
 
 import java.util.Map;
 
@@ -25,6 +26,11 @@ public class ValidationUtils {
             }
         }
         throw new InvalidDepartmentException("Invalid department: " + input);
+    }
+    public static void validateYearOfExperience(int year) throws InvalidYearOfExperienceException {
+        if (year < 0) {
+            throw new InvalidYearOfExperienceException("Year of Experience cannot be negative.");
+        }
     }
 
 }

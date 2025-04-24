@@ -3,6 +3,7 @@ package com.example.employeemanagementsystem.controller;
 import com.example.employeemanagementsystem.exception.EmployeeNotFoundException;
 import com.example.employeemanagementsystem.exception.InvalidDepartmentException;
 import com.example.employeemanagementsystem.exception.InvalidSalaryException;
+import com.example.employeemanagementsystem.exception.InvalidYearOfExperienceException;
 import com.example.employeemanagementsystem.model.Employee;
 import com.example.employeemanagementsystem.util.ValidationUtils;
 
@@ -27,9 +28,10 @@ public class EmployeeService<T> {
     }
 
     // CRUD operations
-    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience) throws InvalidSalaryException, InvalidDepartmentException {
+    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience) throws InvalidSalaryException, InvalidDepartmentException, InvalidYearOfExperienceException {
         ValidationUtils.validateSalary(salary);
         ValidationUtils.validateDepartment(String.valueOf(department));
+        ValidationUtils.validateYearOfExperience(yearsOfExperience);
        return employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
     }
 
@@ -38,10 +40,10 @@ public class EmployeeService<T> {
         return employees.remove(employeeId);
     }
 
-    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) throws InvalidSalaryException, EmployeeNotFoundException {
+    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) throws InvalidSalaryException, EmployeeNotFoundException, InvalidYearOfExperienceException {
         ValidationUtils.validateEmployeeById(employees, updatedEmployee.getId());
         ValidationUtils.validateSalary(updatedEmployee.getSalary());
-
+        ValidationUtils.validateYearOfExperience(updatedEmployee.getYearsOfExperience());
         return employees.put(employeeId, updatedEmployee);
     }
 
