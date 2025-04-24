@@ -1,6 +1,8 @@
 package com.example.employeemanagementsystem.controller;
 
+import com.example.employeemanagementsystem.exception.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
+import com.example.employeemanagementsystem.util.ValidationUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,8 +25,8 @@ public class EmployeeService<T> {
     }
 
     // CRUD operations
-    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience){
-
+    public Employee<T> addEmployee(T employeeId, String name, Employee.DepartmentType department, double salary, int yearsOfExperience) throws InvalidSalaryException {
+        ValidationUtils.validateSalary(salary);
        return employees.put(employeeId, new Employee<>(employeeId, name, department, salary, yearsOfExperience));
     }
 
@@ -35,10 +37,11 @@ public class EmployeeService<T> {
         return employees.remove(employeeId);
     }
 
-    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) {
+    public Employee<T> updateEmployeeDetails(T employeeId, Employee<T> updatedEmployee) throws InvalidSalaryException {
         if (!employees.containsKey(employeeId)) {
             return  null;
         }
+        ValidationUtils.validateSalary(updatedEmployee.getSalary());
         return employees.put(employeeId, updatedEmployee);
     }
 
