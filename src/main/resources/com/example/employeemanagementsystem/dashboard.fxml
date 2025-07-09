@@ -1,63 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="426.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.DashboardController">
+<?import javafx.scene.layout.ColumnConstraints?>
+<AnchorPane prefHeight="520.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.DashboardController" style="-fx-background-color: #f8fafc;">
 
-    <!-- Search Bar -->
-    <HBox spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-        <TextField fx:id="searchField" onKeyTyped="#searchByName" promptText="Search by name..." HBox.hgrow="ALWAYS" />
-        <Button onAction="#searchByName" text="Search" />
-        <Button onAction="#clearSearchByName" text="Reset" />
+    <!-- Search and Filter Section -->
+    <HBox spacing="12" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;">
+        <effect>
+            <DropShadow radius="6" color="#00000015" />
+        </effect>
+
+        <TextField fx:id="searchField" onKeyTyped="#searchByName" promptText="Search employees by name..." HBox.hgrow="ALWAYS"
+                   style="-fx-background-radius: 6; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-padding: 8;" />
+        <Button onAction="#searchByName" text="Search" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 8 16;" />
+        <Button onAction="#clearSearchByName" text="Reset" style="-fx-background-color: #6b7280; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 8 16;" />
     </HBox>
 
-    <!-- Table -->
-    <TableView fx:id="employeeTable" prefHeight="182.0" prefWidth="752.0" AnchorPane.bottomAnchor="184.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0">
-        <columns>
-            <TableColumn fx:id="idColumn" prefWidth="100" text="ID" />
-            <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
-            <TableColumn fx:id="departmentColumn" prefWidth="150" text="Department" />
-            <TableColumn fx:id="salaryColumn" prefWidth="100" text="Salary" />
-            <TableColumn fx:id="yearsOfExperienceColumn" prefWidth="150" text="Experience" />
-            <TableColumn fx:id="ratingColumn" prefWidth="100" text="Rating" />
-        </columns>
-    </TableView>
-   <HBox layoutX="19.0" layoutY="265.0">
-      <children>
-         <Pane>
-            <children>
-                  <TextField fx:id="nameField" prefHeight="0.0" prefWidth="152.0" promptText="Name" />
-                  <TextField fx:id="salaryField" layoutY="35.0" prefHeight="26.0" prefWidth="150.0" promptText="Salary" />
-                  <TextField fx:id="yearsOfExperienceField" layoutX="1.0" layoutY="72.0" prefHeight="26.0" prefWidth="150.0" promptText="Years of experience" />
-            
-                                 <ChoiceBox fx:id="ratingChoiceBox" layoutX="177.0" layoutY="21.0" prefWidth="150.0" />
-               <ChoiceBox fx:id="departmentChoiceBox" layoutX="177.0" layoutY="73.0" prefWidth="150.0" />
-                <Button layoutX="205.0" layoutY="108.0" onAction="#addEmployee" text="Add" />
-                  <Button layoutX="271.0" layoutY="109.0" onAction="#updateEmployeeDetails" text="Update" />
-                  <Button layoutX="458.0" layoutY="6.0" onAction="#sortByExperience" text="Sort by Experience" />
-                  <Button layoutX="598.0" layoutY="5.0" onAction="#deleteEmployee" text="Remove Selected" />
-               <Text fill="#222222" layoutX="179.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
-                  <font>
-                     <Font name="System Bold" size="11.0" />
-                  </font>
-               </Text>
-               <Text fill="#222222" layoutX="179.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rating">
-                  <font>
-                     <Font name="System Bold" size="11.0" />
-                  </font>
-               </Text>
-            </children>
-         </Pane>
-      </children>
-   </HBox>
+    <!-- Table Section -->
+    <VBox AnchorPane.topAnchor="65" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="170" spacing="10" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;">
+        <effect>
+            <DropShadow radius="6" color="#00000015" />
+        </effect>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Text text="Employee Records" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-fill: #1e293b;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Sort by Experience" onAction="#sortByExperience"
+                    style="-fx-background-color: #8b5cf6; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 6 12;" />
+             <Button text="Sort by Salary" onAction="#sortByMaxSalary"
+                    style="-fx-background-color: #8b5cf6; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 6 12;" />
+            <Button text="Delete Selected" onAction="#deleteEmployee"
+                    style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 6 12;" />
+        </HBox>
+
+        <TableView fx:id="employeeTable" VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: transparent; -fx-border-color: #e5e7eb; -fx-border-radius: 8;">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="80" text="ID" style="-fx-alignment: CENTER;" />
+                <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
+                <TableColumn fx:id="departmentColumn" prefWidth="130" text="Department" />
+                <TableColumn fx:id="salaryColumn" prefWidth="100" text="Salary" style="-fx-alignment: CENTER_RIGHT;" />
+                <TableColumn fx:id="yearsOfExperienceColumn" prefWidth="120" text="Experience (Years)" style="-fx-alignment: CENTER;" />
+                <TableColumn fx:id="ratingColumn" prefWidth="80" text="Rating" style="-fx-alignment: CENTER;" />
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- Employee Form Section -->
+    <VBox AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" spacing="20" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 25;">
+        <effect>
+            <DropShadow radius="6" color="#00000015" />
+        </effect>
+
+        <Text text="Employee Details" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-fill: #1e293b;" />
+
+        <GridPane hgap="20" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="25" />
+                <ColumnConstraints percentWidth="25" />
+                <ColumnConstraints percentWidth="25" />
+                <ColumnConstraints percentWidth="25" />
+            </columnConstraints>
+
+            <!-- Full Name -->
+            <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Text text="Full Name" style="-fx-font-weight: bold; -fx-fill: #374151;" />
+                <TextField fx:id="nameField" promptText="Enter full name"
+                           style="-fx-background-radius: 6; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-padding: 10;" />
+            </VBox>
+
+            <!-- Department -->
+            <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Text text="Department" style="-fx-font-weight: bold; -fx-fill: #374151;" />
+                <ChoiceBox fx:id="departmentChoiceBox" prefWidth="200"
+                           style="
+      -fx-border-radius: 8;
+      -fx-background-radius: 5;
+      -fx-border-width: 2;
+      -fx-background-color: #eef2ff;
+      -fx-padding: 6 12;
+      -fx-font-size: 14px;
+      -fx-font-weight: bold;
+      -fx-text-fill: #3730a3;
+    " />
+
+            </VBox>
+
+            <!-- Salary -->
+            <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <Text text="Salary ($)" style="-fx-font-weight: bold; -fx-fill: #374151;" />
+                <TextField fx:id="salaryField" promptText="Enter salary"
+                           style="-fx-background-radius: 6; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-padding: 10;" />
+            </VBox>
+
+            <!-- Performance Rating -->
+            <VBox spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                <Text text="Performance Rating" style="-fx-font-weight: bold; -fx-fill: #374151;" />
+                <ChoiceBox fx:id="ratingChoiceBox" prefWidth="200"
+                           style="
+      -fx-background-radius: 8;
+      -fx-border-radius: 8;
+      -fx-border-width: 2;
+      -fx-background-color: #d1fae5; /* light green background */
+      -fx-padding: 6 12;
+      -fx-font-size: 14px;
+      -fx-font-weight: bold;
+      -fx-text-fill: #065f46; /* dark green text */
+    " />
+
+            </VBox>
+
+            <!-- Years of Experience -->
+            <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Text text="Years of Experience" style="-fx-font-weight: bold; -fx-fill: #374151;" />
+                <TextField fx:id="yearsOfExperienceField" promptText="Enter years"
+                           style="-fx-background-radius: 6; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-padding: 10;" />
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox spacing="12" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3">
+                <Button text="➕ Add Employee" onAction="#addEmployee"
+                        style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 10 20; -fx-font-weight: bold;" />
+                <Button text="✏️ Update Employee" onAction="#updateEmployeeDetails"
+                        style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 10 20; -fx-font-weight: bold;" />
+                <Button text="🔄 Clear Form"
+                        style="-fx-background-color: #6b7280; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 10 20;" />
+            </HBox>
+        </GridPane>
+    </VBox>
 
 </AnchorPane>

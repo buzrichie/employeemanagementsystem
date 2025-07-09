@@ -137,5 +137,14 @@ public class EmployeeService<T> {
         return getAllEmployees().stream().sorted().toList();
     }
 
+    public List<Employee<T>> sortByMaxSalary() {
+        return employees.values().stream()
+                .sorted((x, y) -> Double.compare(y.getSalary(), x.getSalary()))
+                .collect(Collectors.toList());
+    }
+
+
+
+
 
 }

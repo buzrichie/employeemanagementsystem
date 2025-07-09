@@ -3,28 +3,145 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.employeemanagementsystem.WelcomeController"
-      alignment="CENTER"
-      spacing="20.0"
-      prefWidth="600" prefHeight="400">
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.WelcomeController">
 
-    <padding>
-        <Insets top="30" right="30" bottom="30" left="30"/>
-    </padding>
+    <!-- Top Menu Bar -->
+    <top>
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Open" />
+                        <MenuItem onAction="#handleExit" text="Exit" />
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem text="Settings" />
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 
-    <Label text="Employee Management System">
-        <font>
-            <Font size="24" />
-        </font>
-    </Label>
+    <!-- Main Content -->
+    <center>
+        <StackPane>
 
-    <Label text="Welcome! Manage your employees with ease." />
+            <!-- Background Gradient -->
+<!--            <Rectangle width="800.0" height="600.0" arcWidth="5.0" arcHeight="5.0" stroke="TRANSPARENT">-->
+<!--                <fill>-->
+<!--                    <LinearGradient endX="1.0" endY="1.0">-->
+<!--                        <stops>-->
+<!--                            <Stop color="#f8fafc"/>-->
+<!--                            <Stop color="#e2e8f0" offset="1.0"/>-->
+<!--                        </stops>-->
+<!--                    </LinearGradient>-->
+<!--                </fill>-->
+<!--            </Rectangle>-->
 
-    <Button text="Go to Dashboard" onAction="#handleGoToDashboard"/>
-    <Button text="Exit" onAction="#handleExit"/>
-</VBox>
+            <!-- Foreground Content -->
+            <VBox alignment="CENTER" spacing="20.0">
+                <padding>
+                    <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+                </padding>
+
+                <!-- Header -->
+                <VBox alignment="CENTER" spacing="15.0">
+                    <VBox alignment="CENTER" style="-fx-background-color: #3b82f6; -fx-background-radius: 40;">
+                        <Label text="👥" textFill="WHITE">
+                            <font><Font size="36.0" /></font>
+                        </Label>
+                    </VBox>
+                    <Label text="Employee Management System" textFill="#1e293b">
+                        <font><Font name="System Bold" size="32.0" /></font>
+                    </Label>
+                    <Label maxWidth="500.0" text="Streamline your workforce management with our comprehensive platform" textAlignment="CENTER" textFill="#64748b" wrapText="true">
+                        <font><Font size="16.0" /></font>
+                    </Label>
+                </VBox>
+
+                <!-- Statistic Cards -->
+                <HBox alignment="CENTER" spacing="30.0">
+                    <!-- Active Employees -->
+                    <VBox alignment="CENTER" prefWidth="150.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;">
+                        <effect><DropShadow color="#00000020" radius="10.0" /></effect>
+                        <Label text="247" textFill="#3b82f6">
+                            <font><Font name="System Bold" size="24.0" /></font>
+                        </Label>
+                        <Label text="Active Employees" textFill="#64748b">
+                            <font><Font size="12.0" /></font>
+                        </Label>
+                    </VBox>
+
+                    <!-- Departments -->
+                    <VBox alignment="CENTER" prefWidth="150.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;">
+                        <effect><DropShadow color="#00000020" radius="10.0" /></effect>
+                        <Label text="12" textFill="#3b82f6">
+                            <font><Font name="System Bold" size="24.0" /></font>
+                        </Label>
+                        <Label text="Departments" textFill="#64748b">
+                            <font><Font size="12.0" /></font>
+                        </Label>
+                    </VBox>
+
+                    <!-- Performance -->
+                    <VBox alignment="CENTER" prefWidth="150.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;">
+                        <effect><DropShadow color="#00000020" radius="10.0" /></effect>
+                        <Label text="98%" textFill="#3b82f6">
+                            <font><Font name="System Bold" size="24.0" /></font>
+                        </Label>
+                        <Label text="Performance" textFill="#64748b">
+                            <font><Font size="12.0" /></font>
+                        </Label>
+                    </VBox>
+                </HBox>
+
+                <!-- Call to Action -->
+                <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30;">
+                    <effect><DropShadow color="#00000030" radius="15.0" /></effect>
+
+                    <Label text="Ready to get started?" textFill="#1e293b">
+                        <font><Font name="System Bold" size="20.0" /></font>
+                    </Label>
+                    <Label text="Access your dashboard to manage employees, view reports, and monitor performance" textAlignment="CENTER" textFill="#64748b" wrapText="true">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+
+                    <Button fx:id="dashboardBtn" onAction="#handleGoToDashboard" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 16px; -fx-font-weight: bold;" text="Go to Dashboard →">
+                        <effect><DropShadow color="#3b82f640" offsetY="2.0" radius="8.0" /></effect>
+                    </Button>
+
+                    <HBox alignment="CENTER" spacing="15.0">
+                        <Button prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-text-fill: #374151; -fx-font-size: 14px;" text="⚙ Settings" />
+                        <Button fx:id="exitBtn" onAction="#handleExit" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: transparent; -fx-border-color: #fca5a5; -fx-border-radius: 6; -fx-text-fill: #dc2626; -fx-font-size: 14px;" text="⏻ Exit" />
+                    </HBox>
+                </VBox>
+
+                <!-- Footer -->
+                <Region VBox.vgrow="ALWAYS" />
+                <Separator prefWidth="200.0" />
+                <Label text="© 2024 Employee Management System • Secure • Reliable • Efficient" textFill="#94a3b8">
+                    <font><Font size="12.0" /></font>
+                </Label>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

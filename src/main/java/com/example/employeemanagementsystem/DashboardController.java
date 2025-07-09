@@ -189,6 +189,12 @@ public class DashboardController {
             employeeTable.setItems(FXCollections.observableArrayList(employeeService.sortByExperience()));
         }
     }
+    public void sortByMaxSalary() {
+        if (!employeeService.getAllEmployees().isEmpty()) {
+            employeeTable.setItems(FXCollections.observableArrayList(employeeService.sortByMaxSalary()));
+        }
+    }
+
 
     //Clean up the Employee details after Adding or Updating
     public void employeeTextFieldCleanUp(){
